@@ -3,6 +3,13 @@ import { FaEdit } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 
 export default function Categorias() {
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [input, setInput] = useState();
+  const [autor, setAutor] = useState([]);
+
   return (
     <div>
       <div class="table-responsive">
