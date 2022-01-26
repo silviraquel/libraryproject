@@ -11,7 +11,8 @@ export default function Author() {
   const handleShow = () => setShow(true);
   const [input, setInput] = useState();
   const [autor, setAutor] = useState([]);
-    
+
+  fetch('/api/authors').then(response => console.log(response.json()));
 
   return (
     <>
