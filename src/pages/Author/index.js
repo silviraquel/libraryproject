@@ -16,18 +16,33 @@ export default function Author() {
   //fetch('/api/authors').then(response => console.log(response.json()));
 
     useEffect(() => {
+      findAll()
+    }, [])
+
+    const findAll = () => {
       fetch('/api/authors')
         .then(resposta =>resposta.json())
         .then (dados => {
           setAutores(dados.content)
           setTotalElements(dados.totalElements)
         })
-    }, [])
+    }
+ const adicionarAutores = () => {
 
- const adicionarAutores = (autor) => {
-  const autores = [...this.state.autores, autor]
-  setAutores(autoresAtuais => [...autoresAtuais, autor])
-  }  
+  }
+  
+  const DeleteAuthor = (autores) => {
+    if(window.confirm(`Tem certeza que deseja remover ${autores.name}"?`)) {
+      fetch( `/api/authors/${autores.id}`,{
+        method: 'DELETE'
+      })
+      .then(resposta => {
+        if (resposta.ok) {
+          findAll()
+        }
+    })
+  }}
+  
 
   return (
     <>
@@ -53,7 +68,7 @@ export default function Author() {
       <Button onClick={adicionarAutores}>
       <FaEdit />
     </Button>
-    <button type="button" className="btn btn-danger">
+    <button type="button" className="btn btn-danger" onClick={(e)=> DeleteAuthor(value)}>
       <FaTrashAlt />
     </button>
       </td>
